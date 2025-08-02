@@ -1,22 +1,19 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Heart } from 'lucide-react';
 import { Logo } from './Logo';
-export function Footer({
-  setActivePage
-}) {
-  const handleNavigation = page => {
-    setActivePage(page);
-    window.scrollTo(0, 0);
-  };
-  return <footer className="bg-pink-50 py-12 px-6">
+import { Link } from 'react-router-dom';
+
+export function Footer() {
+  return (
+    <footer className="bg-pink-50 py-12 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-1">
-            <button onClick={() => handleNavigation('home')} className="mb-4">
+            <Link to="/" className="block mb-4">
               <Logo className="h-20 w-auto" />
-            </button>
+            </Link>
             <p className="text-gray-600 mb-4 mt-2">
-              Let their tail tell your forever bond.
+              讓牠的尾巴，訴說你們永恆的連結
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-pink-500">
@@ -37,92 +34,92 @@ export function Footer({
             </div>
           </div>
           <div>
-            <h3 className="text-gray-800 font-medium mb-4">Features</h3>
+            <h3 className="text-gray-800 font-medium mb-4">功能</h3>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => handleNavigation('memorial-profile')} className="text-gray-600 hover:text-pink-500">
-                  Memorial Profile
-                </button>
+                <Link to="/memorial-profile" className="text-gray-600 hover:text-pink-500">
+                  寵物紀念頁
+                </Link>
               </li>
               <li>
-                <button onClick={() => handleNavigation('memory-timeline')} className="text-gray-600 hover:text-pink-500">
-                  Memory Timeline
-                </button>
+                <Link to="/memory-timeline" className="text-gray-600 hover:text-pink-500">
+                  時光軸
+                </Link>
               </li>
               <li>
-                <button onClick={() => handleNavigation('rainbow-letters')} className="text-gray-600 hover:text-pink-500">
-                  Rainbow AI Letters
-                </button>
+                <Link to="/rainbow-letters" className="text-gray-600 hover:text-pink-500">
+                  彩虹信
+                </Link>
               </li>
               <li>
-                <button onClick={() => handleNavigation('healing-rituals')} className="text-gray-600 hover:text-pink-500">
-                  Healing Rituals
-                </button>
+                <Link to="/healing-rituals" className="text-gray-600 hover:text-pink-500">
+                  療癒儀式
+                </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-gray-800 font-medium mb-4">Resources</h3>
+            <h3 className="text-gray-800 font-medium mb-4">資源</h3>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => handleNavigation('grief-support')} className="text-gray-600 hover:text-pink-500">
-                  Grief Support
-                </button>
+                <a href="#" className="text-gray-600 hover:text-pink-500">
+                  悲傷支援
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigation('community-guidelines')} className="text-gray-600 hover:text-pink-500">
-                  Community Guidelines
-                </button>
+                <a href="#" className="text-gray-600 hover:text-pink-500">
+                  社群指南
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigation('pet-loss-articles')} className="text-gray-600 hover:text-pink-500">
-                  Pet Loss Articles
-                </button>
+                <a href="#" className="text-gray-600 hover:text-pink-500">
+                  寵物失去文章
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigation('faq')} className="text-gray-600 hover:text-pink-500">
-                  FAQ
-                </button>
+                <a href="#" className="text-gray-600 hover:text-pink-500">
+                  常見問題
+                </a>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="text-gray-800 font-medium mb-4">Company</h3>
+            <h3 className="text-gray-800 font-medium mb-4">公司</h3>
             <ul className="space-y-2">
               <li>
-                <button onClick={() => handleNavigation('about')} className="text-gray-600 hover:text-pink-500">
-                  About Us
-                </button>
+                <Link to="/about" className="text-gray-600 hover:text-pink-500">
+                  關於我們
+                </Link>
               </li>
               <li>
-                <button onClick={() => handleNavigation('contact')} className="text-gray-600 hover:text-pink-500">
-                  Contact
-                </button>
+                <a href="#" className="text-gray-600 hover:text-pink-500">
+                  聯絡我們
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigation('privacy')} className="text-gray-600 hover:text-pink-500">
-                  Privacy Policy
-                </button>
+                <a href="#" className="text-gray-600 hover:text-pink-500">
+                  隱私政策
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNavigation('terms')} className="text-gray-600 hover:text-pink-500">
-                  Terms of Service
-                </button>
+                <a href="#" className="text-gray-600 hover:text-pink-500">
+                  服務條款
+                </a>
               </li>
             </ul>
           </div>
         </div>
         <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            © 2023 Tailyou. All rights reserved.
+            © 2024 Tailyou. 保留所有權利。
           </p>
           <div className="flex items-center mt-4 md:mt-0">
             <span className="text-gray-500 text-sm flex items-center">
-              Made with <Heart className="w-4 h-4 text-pink-500 mx-1" /> for all
-              beloved pets
+              用 <Heart className="w-4 h-4 text-pink-500 mx-1" /> 為所有摯愛的寵物製作
             </span>
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 }
