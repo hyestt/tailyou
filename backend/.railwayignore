@@ -1,0 +1,13 @@
+# Ignore frontend files that might be in parent directory
+../dist/
+../node_modules/
+../src/
+../public/
+../index.html
+../package.json
+../package-lock.json
+../vite.config.ts
+../tailwind.config.js
+../tsconfig.json
+../postcss.config.js
+../.env
