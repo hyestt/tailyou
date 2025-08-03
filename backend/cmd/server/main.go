@@ -23,9 +23,11 @@ func main() {
 	// Initialize database
 	db, err := config.InitDB(cfg.DatabaseURL)
 	if err != nil {
-		log.Printf("Warning: Failed to connect to database: %v", err)
+		log.Printf("Database connection failed: %v", err)
 		log.Println("Starting server without database connection")
 		db = nil
+	} else {
+		log.Println("Database connected successfully")
 	}
 
 	// Supabase client not needed for simplified backend
