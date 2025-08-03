@@ -32,11 +32,9 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 func (h *AuthHandler) GetCurrentUser(c *gin.Context) {
 	userID := c.GetString("user_id")
 	
-	var user models.User
-	if err := h.db.Where("google_id = ?", userID).First(&user).Error; err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
-		return
-	}
-
-	c.JSON(http.StatusOK, user)
+	c.JSON(http.StatusOK, gin.H{
+		"id":    userID,
+		"email": c.GetString("user_email"),
+		"note":  "Mock user data - implement proper user lookup when needed",
+	})
 }

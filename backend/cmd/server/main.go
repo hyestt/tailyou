@@ -65,6 +65,7 @@ func main() {
 		// Auth routes (public)
 		api.POST("/auth/google", authHandler.GoogleLogin)
 		api.POST("/auth/logout", authHandler.Logout)
+		api.GET("/auth/me", middleware.AuthRequired(), authHandler.GetCurrentUser)
 
 		// Pet routes (protected)
 		pets := api.Group("/pets", middleware.AuthRequired())
