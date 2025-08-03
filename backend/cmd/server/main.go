@@ -26,8 +26,7 @@ func main() {
 		log.Fatal("Failed to connect to database:", err)
 	}
 
-	// Initialize Supabase client
-	supabaseClient := config.InitSupabase(cfg.SupabaseURL, cfg.SupabaseServiceKey)
+	// Supabase client not needed for simplified backend
 
 	// Setup Gin router
 	r := gin.Default()
