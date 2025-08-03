@@ -38,7 +38,7 @@ func main() {
 	r.Use(gin.Recovery())
 
 	// Initialize handlers
-	authHandler := handlers.NewAuthHandler(supabaseClient, db)
+	authHandler := handlers.NewAuthHandler(db)
 	petHandler := handlers.NewPetHandler(db)
 	memoryHandler := handlers.NewMemoryHandler(db)
 	letterHandler := handlers.NewLetterHandler(db, cfg.OpenAIKey)
@@ -47,33 +47,27 @@ func main() {
 	r.GET("/health", func(c *gin.Context) {
 		status := "ok"
 		dbStatus := "not connected"
-		authStatus := "not configured"
 		
 		if db != nil {
 			dbStatus = "connected"
 		}
-		if supabaseClient != nil {
-			authStatus = "configured"
-		}
 		
 		c.JSON(200, gin.H{
-			"status":     status,
-			"message":    "Tailyou Backend API is running",
-			"database":   dbStatus,
-			"auth":       authStatus,
+			"status":   status,
+			"message":  "Tailyou Backend API is running",
+			"database": dbStatus,
 		})
 	})
 
 	// Setup routes
 	api := r.Group("/api/v1")
 	{
-		// Auth routes
+		// Auth routes (public)
 		api.POST("/auth/google", authHandler.GoogleLogin)
-		api.POST("/auth/logout", middleware.AuthRequired(supabaseClient), authHandler.Logout)
-		api.GET("/auth/me", middleware.AuthRequired(supabaseClient), authHandler.GetCurrentUser)
+		api.POST("/auth/logout", authHandler.Logout)
 
-		// Pet routes
-		pets := api.Group("/pets", middleware.AuthRequired(supabaseClient))
+		// Pet routes (protected)
+		pets := api.Group("/pets", middleware.AuthRequired())
 		{
 			pets.POST("", petHandler.CreatePet)
 			pets.GET("", petHandler.GetUserPets)
@@ -82,8 +76,8 @@ func main() {
 			pets.DELETE("/:id", petHandler.DeletePet)
 		}
 
-		// Memory routes
-		memories := api.Group("/memories", middleware.AuthRequired(supabaseClient))
+		// Memory routes (protected)
+		memories := api.Group("/memories", middleware.AuthRequired())
 		{
 			memories.POST("", memoryHandler.CreateMemory)
 			memories.GET("/pet/:petId", memoryHandler.GetPetMemories)
@@ -91,8 +85,8 @@ func main() {
 			memories.DELETE("/:id", memoryHandler.DeleteMemory)
 		}
 
-		// Letter routes
-		letters := api.Group("/letters", middleware.AuthRequired(supabaseClient))
+		// Letter routes (protected)
+		letters := api.Group("/letters", middleware.AuthRequired())
 		{
 			letters.POST("", letterHandler.WriteLetter)
 			letters.GET("/pet/:petId", letterHandler.GetPetLetters)
