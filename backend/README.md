@@ -34,27 +34,25 @@ go run cmd/server/main.go
 
 API 將在 `http://localhost:8080` 啟動
 
-## Railway 部署
+## Railway 部署（使用 Supabase 資料庫）
 
-### 1. 建立 Railway 專案
+### 1. 設置 Supabase
+請先完成 [SUPABASE_SETUP.md](../SUPABASE_SETUP.md) 中的設置步驟
+
+### 2. 建立 Railway 專案
 1. 前往 [Railway.app](https://railway.app)
 2. 連接你的 GitHub 帳號
 3. 建立新專案並連接此 repository
 
-### 2. 新增 PostgreSQL 資料庫
-1. 在 Railway 專案中點擊 "New Service"
-2. 選擇 "Database" -> "PostgreSQL"
-3. 等待部署完成
-
 ### 3. 設定環境變數
 在 Railway 專案中設定以下環境變數：
-- `DATABASE_URL`: 會自動由 Railway PostgreSQL 提供
-- `SUPABASE_URL`
-- `SUPABASE_ANON_KEY` 
-- `SUPABASE_SERVICE_KEY`
-- `OPENAI_API_KEY`
-- `STRIPE_SECRET_KEY`
-- `STRIPE_WEBHOOK_SECRET`
+- `DATABASE_URL`: 從 Supabase Dashboard 獲取
+- `SUPABASE_URL`: 從 Supabase Dashboard 獲取
+- `SUPABASE_ANON_KEY`: 從 Supabase Dashboard 獲取
+- `SUPABASE_SERVICE_KEY`: 從 Supabase Dashboard 獲取
+- `OPENAI_API_KEY`: 你的 OpenAI API 金鑰
+- `STRIPE_SECRET_KEY`: 你的 Stripe 密鑰
+- `STRIPE_WEBHOOK_SECRET`: Stripe Webhook 密鑰
 - `PORT`: 會自動由 Railway 設定
 
 ### 4. 部署
@@ -90,10 +88,10 @@ API 將在 `http://localhost:8080` 啟動
 ## 技術架構
 
 - **框架**: Gin (Go)
-- **資料庫**: PostgreSQL (GORM)
+- **資料庫**: Supabase PostgreSQL (GORM)
 - **認證**: Supabase Auth
 - **AI**: OpenAI GPT
-- **部署**: Railway
+- **部署**: Railway (後端) + Supabase (資料庫/認證)
 
 ## 資料庫模型
 

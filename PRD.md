@@ -63,9 +63,10 @@
 ---
 
 ## 五、技術依賴 (Tech Stack)
-- **雲端儲存**：Supabase  
+- **資料庫 & 認證**：Supabase (PostgreSQL + Google OAuth)
+- **雲端儲存**：Supabase Storage
 - **付費系統**：Stripe  
-- **後端語言**：Golang  
+- **後端語言**：Golang (部署在 Railway)
 - **AI NLP 生成**：OpenAI API  
 - **語系支援**：中、英文多語系系統
 

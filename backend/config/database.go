@@ -9,7 +9,7 @@ import (
 )
 
 func InitDB(databaseURL string) (*gorm.DB, error) {
-	if databaseURL == "" || databaseURL == "${{DATABASE_URL}}" {
+	if databaseURL == "" || databaseURL == "your_supabase_database_url" {
 		log.Println("Warning: DATABASE_URL not set, running without database")
 		return nil, nil
 	}
